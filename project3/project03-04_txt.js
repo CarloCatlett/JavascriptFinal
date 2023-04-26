@@ -23,31 +23,48 @@ let reviews = [
 let reviewTitles = ["My Favorite Workout Game", "Poor Choreography", "Buggy with Poor Tech Support", "Nice Improvement", "Insane"];
 
 function starImages(rating) {
-      let imageText = "";
-      for (let i = 1; i <= rating; i++) {
-        imageText += "<img src = 'star.png'>";
-      }
-      return imageText;
-    }
+  let imageText = "";
+  for (let i = 1; i <= rating; i++) {
+    imageText += "<img src='star.png'>";
+  }
+  return imageText;
+}
 
-    for (let i = 0; i < reviewers.length; i++) {
-      let reviewCode = "";
-    
-      if (reviewType[i] === "P") {
-        reviewCode += "<table class='prime'>";
-      } else if (reviewType[i] === "N") {
-        reviewCode += "<table class='new'>";
-      } else {
-        reviewCode += "<table>";
-      }
-    
-      reviewCode += "<caption>" + reviewTitles[i] + "</caption>";
-  reviewCode += "<tr><th>By</th><td>" + reviewers[i] + "</td></tr>";
-  reviewCode += "<tr><th>Review Date</th><td>" + reviewDates[i] + "</td></tr>";
-  reviewCode += "<tr><th>Rating</th><td>" + rating[i] + "</td></tr>";
-  reviewCode += "<tr><td colspan='2'>" + reviews[i] + "</td></tr>";
+
+const reviewsArray = [];
+for (let i = 0; i < reviewers.length; i++) {
+  const review = {
+    reviewer: reviewers[i],
+    reviewType: reviewType[i],
+    rating: rating[i],
+    reviewDate: reviewDates[i],
+    reviewTitle: reviewTitles[i],
+    reviewText: reviews[i]
+  };
+  reviewsArray.push(review);
+}
+
+
+reviewsArray.sort((a, b) => b.rating - a.rating);
+
+for (let i = 0; i < reviewsArray.length; i++) {
+  let reviewCode = "";
+
+  if (reviewsArray[i].reviewType === "P") {
+    reviewCode += "<table class='prime'>";
+  } else if (reviewsArray[i].reviewType === "N") {
+    reviewCode += "<table class='new'>";
+  } else {
+    reviewCode += "<table>";
+  }
+
+  reviewCode += "<caption>" + reviewsArray[i].reviewTitle + "</caption>";
+  reviewCode += "<tr><th>By</th><td>" + reviewsArray[i].reviewer + "</td></tr>";
+  reviewCode += "<tr><th>Review Date</th><td>" + reviewsArray[i].reviewDate + "</td></tr>";
+  reviewCode += "<tr><th>Rating</th><td>" + starImages(reviewsArray[i].rating) + "</td></tr>";
+  reviewCode += "<tr><td colspan='2'>" + reviewsArray[i].reviewText + "</td></tr>";
   reviewCode += "</table>";
-    
-      const articles = document.getElementsByTagName("article");
-      articles[0].insertAdjacentHTML("beforeend", reviewCode);
-    }
+
+  const articles = document.getElementsByTagName("article");
+  articles[0].insertAdjacentHTML("beforeend", reviewCode);
+}
