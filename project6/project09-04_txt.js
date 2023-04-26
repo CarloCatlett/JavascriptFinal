@@ -19,41 +19,38 @@ window.addEventListener("puzzleSolved", updateRecord);
 
 // Event listener that is run when the page loads
 window.addEventListener("load", function() {
-      if (document.cookie) {
-            var best = getBestTime();
-            var bestText = document.querySelector('#best');
-            bestText.textContent = best + ' seconds';
-      }
+if (document.cookie) {
+var best = getBestTime();
+var bestText = document.getElementById('best');
+bestText.textContent = best + ' seconds';
+}
 });
 
 function getBestTime() {
-      if (document.cookie) {
+if (document.cookie) {
         
-        var cookieArray = document.cookie.split('=');
-        var bestTime = parseInt(cookieArray[1]);
-        return bestTime;
-
-      } else {
-
-            return 9999;
-
-      }
+      var cookieArray = document.cookie.split('=');
+      var bestTime = parseInt(cookieArray[1]);
+      return bestTime;
+  
+    } else {
+  
+          return 9999;
+  
     }
+  }
 
   function updateRecord() {
-  var solutionTime = parseInt(document.getElementById("timer").textContent);
-  var bestTime = getBestTime();
-  
-  if (solutionTime < bestTime) {
-    bestTime = solutionTime;
-    var bestText = document.getElementById("best");
-    bestText.textContent = bestTime + " seconds";
-    
-    var expires = new Date();
-    expires.setTime(expires.getTime() + (90 * 24 * 60 * 60 * 1000));
-    var cookieValue = "best=" + bestTime + "; expires=" + expires.toUTCString();
-    document.cookie = cookieValue;
-  }
-}
 
-}
+      var solutionTime = parseInt(document.getElementById('timer').textContent);
+      
+      var bestTime = getBestTime();
+      
+      var bestText = document.getElementById('best');
+      bestText.textContent = bestTime + ' seconds';
+      
+      var expires = new Date();
+      expires.setTime(expires.getTime() + (90 * 24 * 60 * 60 * 1000)); // 90 days
+      document.cookie = "bestTime=" + bestTime + ";expires=" + expires.toUTCString();
+      }
+      
