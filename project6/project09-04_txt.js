@@ -41,17 +41,19 @@ function getBestTime() {
     }
 
   function updateRecord() {
-
-  var solutionTime = parseInt(document.querySelector('#timer').textContent);
-
-  var bestTime = parseInt(localStorage.getItem('bestTime'));
-
-  if (solutionTime < bestTime || !bestTime) {
+  var solutionTime = parseInt(document.getElementById("timer").textContent);
+  var bestTime = getBestTime();
+  
+  if (solutionTime < bestTime) {
     bestTime = solutionTime;
-
-    var bestText = document.querySelector('#bestTime');
-    bestText.textContent = bestTime + ' seconds';
-
-    localStorage.setItem('bestTime', bestTime);
+    var bestText = document.getElementById("bestTime");
+    bestText.textContent = bestTime + " seconds";
+    
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (90 * 24 * 60 * 60 * 1000));
+    var cookieValue = "best=" + bestTime + "; expires=" + expires.toUTCString();
+    document.cookie = cookieValue;
   }
+}
+
 }
