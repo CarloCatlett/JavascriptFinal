@@ -31,12 +31,11 @@ function starImages(rating) {
     }
 
     for (let i = 0; i < reviewers.length; i++) {
-      const reviewer = reviewers[i];
       let reviewCode = "";
     
-      if (reviewer.reviewType === "P") {
+      if (reviewType[i] === "P") {
         reviewCode += "<table class='prime'>";
-      } else if (reviewer.reviewType === "N") {
+      } else if (reviewType[i] === "N") {
         reviewCode += "<table class='new'>";
       } else {
         reviewCode += "<table>";
