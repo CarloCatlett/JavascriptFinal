@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      JavaScript 7th Edition
+      Chapter 3
+      Hands-on Project 3-1
+
+      Author: Carlo Catlett
+      Date: 4/25/2023
+
+      Filename: project03-01.html
+   -->
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+   <title>Hands-on Project 3-1</title>
+   <link rel="stylesheet" href="styles.css" />
+   <script src="project03-01_txt.js" defer></script>
+</head>
+
+<body>
+   <header>
+      <h1>
+         Hands-on Project 3-1
+      </h1>
+   </header>
+
+   <article>
+      <h2>Lunch selections</h2>
+      <form>
+
+         <input type="number" class="menuItem" id="item1" value="0" min="0" data-price="11.95">
+         <label for="item1">Fried chicken ($11.95)</label>
+         
+         <input type="number" class="menuItem" id="item2" value="0" min="0"  data-price="13.95">
+         <label for="item2">Fried halibut ($13.95)</label>
+         
+         <input type="number" class="menuItem" id="item3" value="0" min="0"  data-price="10.95">
+         <label for="item3">Hamburger ($10.95)</label>
+         
+         <input type="number" class="menuItem" id="item4" value="0" min="0"  data-price="17.95">
+         <label for="item4">Grilled salmon ($17.95)</label>
+
+         <input type="number" class="menuItem" id="item5" value="0" min="0"  data-price="8.95">
+         <label for="item5">Side salad ($8.95)</label>
+      </form>
+      <aside>
+         <span id="totalLab">Total Cost of Items</span>
+         <span id="foodTotal"></span>
+         <br></br>
+         <span id="taxLab">Tax</span>
+         <span id="foodTax"></span>
+         <br></br>
+         <span id="billLab">TOTAL </span>
+         <span id="totalBill"></span>      
+      </aside>
+   </article>
+</body>
+</html>
