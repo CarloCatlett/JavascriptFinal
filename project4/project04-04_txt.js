@@ -45,29 +45,21 @@ function runTheRegister() {
       return;
    }
 
-
-   try {
-
-      if (changeValue < 0) {
-       throw new Error("Cash amount doesn't cover the bill");
-     }
- 
-     var changeBox = document.getElementById("change");
-     changeBox.value = formatCurrency(changeValue);
-     calcChange(changeValue);
-   } catch (e) {
-
-      var warningBox = document.getElementById("warning");
-     warningBox.innerHTML = e.message;
-   }
-   
-   let changeValue = cashBox.value - billBox.value;  // calculate the change 
+   let billValue = parseFloat(billBox.value);
+   let changeValue = cashValue - billValue;  // calculate the change 
    
    changeBox.value = formatCurrency(changeValue); // format the change as currency
-
    
-   
-   calcChange(changeValue); // Determine the units of currency needed for the change
+   try {
+     if (changeValue < 0) {
+       throw new Error("Cash amount doesn't cover the bill");
+     }
+     
+     calcChange(changeValue); // Determine the units of currency needed for the change
+   } catch (e) {
+     var warningBox = document.getElementById("warning");
+     warningBox.innerHTML = e.message;
+   }
 }
 
 // Function to calculate the change by each unit of currency
@@ -96,37 +88,30 @@ function calcChange(changeValue) {
    let coin25Amt = determineCoin(changeValue*100, 25);
    document.getElementById("coin25").innerHTML = coin25Amt;
    changeValue -= coin25Amt*0.25;   
-   
    // Determine the number of dimes
-   let coin10Amt = determineCoin(changeValue*100, 10);
-   document.getElementById("coin10").innerHTML = coin10Amt;
-   changeValue -= coin10Amt*0.10; 
-   
-   // Determine the number of nickels
-   let coin5Amt = determineCoin(changeValue*100, 5);
-   document.getElementById("coin5").innerHTML = coin5Amt;
-   changeValue -= coin5Amt*0.05;  
-   
-   // Determine the number of pennies
-   // The Math.round() method rounds the value to the nearest integer
-   let coin1Amt = Math.round(changeValue*100);
-   document.getElementById("coin1").innerHTML = coin1Amt;
+let coin10Amt = determineCoin(changeValue100, 10);
+document.getElementById("coin10").innerHTML = coin10Amt;
+changeValue -= coin10Amt0.10;
+
+// Determine the number of nickels
+let coin5Amt = determineCoin(changeValue100, 5);
+document.getElementById("coin5").innerHTML = coin5Amt;
+changeValue -= coin5Amt0.05;
+
+// Determine the number of pennies
+// The Math.round() method rounds the value to the nearest integer
+let coin1Amt = Math.round(changeValue*100);
+document.getElementById("coin1").innerHTML = coin1Amt;
 }
 
-
-
-
-
-/* ================================================================= */
-
-// Function to determine the largest whole number of currency units that 
+// Function to determine the largest whole number of currency units that
 // can fit within the cash value
 function determineCoin(cashValue, currencyUnit) {
-   // The parseInt() function returns the integer value of the ratio
-   return parseInt(cashValue/currencyUnit);
+// The parseInt() function returns the integer value of the ratio
+return parseInt(cashValue/currencyUnit);
 }
 
- // Function to display a numeric value as a text string in the format ##.## 
- function formatCurrency(value) {
-    return value.toFixed(2);
- }
+// Function to display a numeric value as a text string in the format ##.##
+function formatCurrency(value) {
+return value.toFixed(2);
+}
