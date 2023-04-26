@@ -37,6 +37,15 @@ function zeroTheRegister() {
 function runTheRegister() {
    zeroTheRegister();
 
+   let cashValue = parseFloat(cashBox.value);
+
+   if (cashValue > 100) {
+      var warningBox = document.getElementById("warning");
+      warningBox.innerHTML = "Cash amount cannot be more than $100";
+      return;
+   }
+
+
    try {
 
       if (changeValue < 0) {
