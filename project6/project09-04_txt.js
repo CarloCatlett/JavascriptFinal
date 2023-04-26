@@ -21,7 +21,7 @@ window.addEventListener("puzzleSolved", updateRecord);
 window.addEventListener("load", function() {
       if (document.cookie) {
             var best = getBestTime();
-            var bestText = document.querySelector('#bestTime');
+            var bestText = document.querySelector('#best');
             bestText.textContent = best + ' seconds';
       }
 });
@@ -46,7 +46,7 @@ function getBestTime() {
   
   if (solutionTime < bestTime) {
     bestTime = solutionTime;
-    var bestText = document.getElementById("bestTime");
+    var bestText = document.getElementById("best");
     bestText.textContent = bestTime + " seconds";
     
     var expires = new Date();
